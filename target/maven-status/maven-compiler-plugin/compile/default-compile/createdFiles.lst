@@ -1,0 +1,6 @@
+org\example\webapp\SecurityConfig.class
+org\example\webapp\WebAppApplication.class
+org\example\webapp\MongoRepositoryImpl.class
+org\example\webapp\ProductsController.class
+org\example\webapp\MyMongoRepository.class
+org\example\webapp\Products.class
