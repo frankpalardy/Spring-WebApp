@@ -14,6 +14,9 @@ public class ProductsController {
     @Autowired
     private MyMongoRepository myMongoRepository;
 
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
+
     @GetMapping
     public List<Products> getAllProducts() {
         return myMongoRepository.findAll();
@@ -50,5 +53,11 @@ public class ProductsController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/sendKafkaMessage")
+    public ResponseEntity<Void> sendKafkaMessage(@RequestBody String message) {
+        kafkaProducerService.sendMessage(message);
+        return ResponseEntity.ok().build();
     }
 }

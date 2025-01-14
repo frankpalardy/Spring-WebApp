@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
@@ -17,7 +17,12 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/hello").authenticated()
+                                .anyRequest().permitAll()
+                )
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/**")); // Disable CSRF for all endpoints
+                /*.authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/api/products/**").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer ->
@@ -25,7 +30,7 @@ public class SecurityConfig {
                                 .jwt(jwt ->
                                         jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
                                 )
-                );
+                );*/
         return http.build();
     }
 
